@@ -8,6 +8,40 @@ services:
     networks:
       - portfolio-net
 
+  api:
+    build: ./backend
+    container_name: devsecops-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=admin
+      - DB_PASSWORD=secretpassword
+      - DB_NAME=portfolio_db
+    depends_on:
+      - db
+    networks:
+      - portfolio-net
+
+  db:
+    image: postgres:15-alpine
+    container_name: devsecops-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: portfolio_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - portfolio-net
+
 networks:
   portfolio-net:
     driver: bridge
+
+volumes:
+  postgres_data:
