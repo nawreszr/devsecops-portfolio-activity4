@@ -363,3 +363,25 @@ bash
 cd ~/devsecops-portfolio-next/backend
 DATABASE_URL="postgresql://admin:secretpassword@localhost:5432/portfolio_db" npm test
 https://screenshots/21-tests-backend.png
+
+## 16. Pipeline DevSecOps Jenkins (Tâches 61 à 69)
+
+Le pipeline Jenkins a été configuré pour automatiser l'intégration, les tests et la sécurité (Shift-Left Security).
+
+### Tâches 61 à 63 : Tests, Build et Git SHA
+Le pipeline exécute les tests du frontend et du backend. Si les tests passent, il construit les images Docker en utilisant le hash du commit Git comme tag.
+
+### Tâches 64 & 65 : Gitleaks et Semgrep
+- **Gitleaks** scanne le code à la recherche de secrets accidentellement commités.
+- **Semgrep** effectue une analyse statique (SAST) pour détecter les mauvaises pratiques de sécurité.
+
+### Tâches 66 & 67 : Contrôle des dépendances
+- **npm audit** vérifie les vulnérabilités dans les packages Node.js.
+
+### Tâche 68 : Scan de l'image Docker avec Trivy
+- **Trivy** analyse l'image Docker de l'API pour détecter les vulnérabilités critiques (CVE).
+
+### Tâche 69 : Pipeline global
+Le pipeline échoue en cas de vulnérabilité critique ou de secret détecté (grâce aux commandes de scan). Voici la preuve d'un pipeline complet exécuté avec succès :
+
+![Pipeline Jenkins DevSecOps](screenshots/22-jenkins-pipeline-success.png)
