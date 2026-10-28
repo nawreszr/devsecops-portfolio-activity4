@@ -255,3 +255,71 @@ Nous avons détruit la VM (vagrant destroy -f) puis l'avons recréée. Le Portfo
 Nous avons détruit complètement l'environnement (`vagrant destroy -f` et suppression des conteneurs). Une simple commande `vagrant up --provider=docker` a suffi à recréer la VM, exécuter le playbook Ansible et redéployer automatiquement le Portfolio sans aucune intervention manuelle.
 
 ![Test de résilience](screenshots/12-resilience-vagrant.png)
+
+## 12. Évolution et sécurisation de l'API (Tâches 46 à 52)
+
+L'API Express a été sécurisée et connectée. Voici les preuves des tests effectués :
+
+### Tâche 46 : Route POST /api/contact
+Test d'envoi réussi d'un message :
+![Succès API](screenshots/13-api-contact-success.png)
+
+### Tâches 48 & 49 : Validation Zod et Gestion des erreurs
+Test de refus d'un message invalide (nom trop court, email invalide, message trop court) :
+![Erreur Validation](screenshots/14-api-contact-validation-error.png)
+
+### Tâche 50 : Headers de sécurité avec Helmet
+Preuve de l'ajout des headers HTTP de sécurité (X-Frame-Options, etc.) :
+![Headers Helmet](screenshots/15-api-helmet-headers.png)
+
+### Tâche 51 : Rate Limiting
+Preuve du blocage après 5 requêtes (Erreur 429 Too Many Requests) :
+![Rate Limiting](screenshots/16-api-rate-limiting-429.png)
+
+### Tâche 52 : Analyse OWASP API Security Top 10
+| Risque (OWASP API) | Mesure mise en place dans l'API |
+|---|---|
+| **API1: Broken Object Level Authorization** | Non applicable pour l'instant (pas d'ID utilisateur ni de base de données). |
+| **API2: Broken Authentication** | Non applicable (API publique de contact). |
+| **API3: Broken Object Property Level Authorization** | Validation stricte des entrées avec **Zod** pour empêcher l'injection de propriétés non désirées. |
+| **API4: Unrestricted Resource Consumption** | Mise en place d'un **Rate Limiting** (express-rate-limit) limitant à 5 requêtes / 15 min par IP. |
+| **API5: Broken Function Level Authorization** | Non applicable. |
+| **API6: Unrestricted Access to Sensitive Business Flows** | Le Rate Limiting empêche le spam du formulaire de contact. |
+| **API7: Server Side Request Forgery** | Non applicable (aucune requête sortante faite par l'API). |
+| **API8: Security Misconfiguration** | Utilisation de **Helmet** pour sécuriser les en-têtes HTTP et masquer la technologie utilisée. |
+| **API9: Improper Inventory Management** | L'API ne dispose que de la route `/api/contact` (surface d'attaque minimale). |
+| **API10: Unsafe Consumption of APIs** | Les données reçues sont rigoureusement validées avant traitement. |
+
+## 12. Évolution et sécurisation de l'API (Tâches 46 à 52)
+
+L'API Express a été sécurisée et connectée. Voici les preuves des tests effectués :
+
+### Tâche 46 : Route POST /api/contact
+Test d'envoi réussi d'un message :
+![Succès API](screenshots/13-api-contact-success.png)
+
+### Tâches 48 & 49 : Validation Zod et Gestion des erreurs
+Test de refus d'un message invalide (nom trop court, email invalide, message trop court) :
+![Erreur Validation](screenshots/14-api-contact-validation-error.png)
+
+### Tâche 50 : Headers de sécurité avec Helmet
+Preuve de l'ajout des headers HTTP de sécurité (X-Frame-Options, etc.) :
+![Headers Helmet](screenshots/15-api-helmet-headers.png)
+
+### Tâche 51 : Rate Limiting
+Preuve du blocage après 5 requêtes (Erreur 429 Too Many Requests) :
+![Rate Limiting](screenshots/16-api-rate-limiting-429.png)
+
+### Tâche 52 : Analyse OWASP API Security Top 10
+| Risque (OWASP API) | Mesure mise en place dans l'API |
+|---|---|
+| **API1: Broken Object Level Authorization** | Non applicable pour l'instant (pas d'ID utilisateur ni de base de données). |
+| **API2: Broken Authentication** | Non applicable (API publique de contact). |
+| **API3: Broken Object Property Level Authorization** | Validation stricte des entrées avec **Zod** pour empêcher l'injection de propriétés non désirées. |
+| **API4: Unrestricted Resource Consumption** | Mise en place d'un **Rate Limiting** (express-rate-limit) limitant à 5 requêtes / 15 min par IP. |
+| **API5: Broken Function Level Authorization** | Non applicable. |
+| **API6: Unrestricted Access to Sensitive Business Flows** | Le Rate Limiting empêche le spam du formulaire de contact. |
+| **API7: Server Side Request Forgery** | Non applicable (aucune requête sortante faite par l'API). |
+| **API8: Security Misconfiguration** | Utilisation de **Helmet** pour sécuriser les en-têtes HTTP et masquer la technologie utilisée. |
+| **API9: Improper Inventory Management** | L'API ne dispose que de la route `/api/contact` (surface d'attaque minimale). |
+| **API10: Unsafe Consumption of APIs** | Les données reçues sont rigoureusement validées avant traitement. |
