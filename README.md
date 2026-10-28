@@ -323,3 +323,9 @@ Preuve du blocage après 5 requêtes (Erreur 429 Too Many Requests) :
 | **API8: Security Misconfiguration** | Utilisation de **Helmet** pour sécuriser les en-têtes HTTP et masquer la technologie utilisée. |
 | **API9: Improper Inventory Management** | L'API ne dispose que de la route `/api/contact` (surface d'attaque minimale). |
 | **API10: Unsafe Consumption of APIs** | Les données reçues sont rigoureusement validées avant traitement. |
+
+### Tâche 55 : Migrations de base de données avec Prisma
+Prisma a été configuré pour gérer le schéma de la base de données. La table `Contact` est créée et synchronisée via la commande :
+```bash
+npx prisma db push
+https://screenshots/19-prisma-migration.png
