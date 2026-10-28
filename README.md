@@ -347,3 +347,19 @@ bash
 cd ~/devsecops-portfolio-next/backend
 DATABASE_URL="postgresql://admin:secretpassword@localhost:5432/portfolio_db" npm test
 (Vous pouvez ajouter une capture d'écran similaire pour le backend, par exemple 21-tests-backend.png)
+
+## 14. Tests applicatifs (Tâches 57 à 60)
+
+### Tâche 57 : Test Frontend (Next.js)
+Un test avec Jest et React Testing Library vérifie que le formulaire de contact s'affiche correctement.
+```bash
+cd ~/devsecops-portfolio-next && npm test
+https://screenshots/20-tests-frontend.png
+
+Tâches 58, 59 & 60 : Tests Backend (API + PostgreSQL)
+Les tests du backend vérifient la création d'un message (intégration BDD), ainsi que le rejet des données invalides (validation Zod).
+
+bash
+cd ~/devsecops-portfolio-next/backend
+DATABASE_URL="postgresql://admin:secretpassword@localhost:5432/portfolio_db" npm test
+https://screenshots/21-tests-backend.png
