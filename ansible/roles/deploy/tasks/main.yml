@@ -1,0 +1,12 @@
+---
+- name: Vérifier que Docker est accessible
+  command: docker --version
+  register: docker_version
+
+- name: Déployer le Portfolio avec Docker Compose
+  shell: |
+    cd /vagrant
+    docker-compose down
+    docker-compose up -d --build
+  args:
+    executable: /bin/bash

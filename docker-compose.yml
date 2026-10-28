@@ -1,0 +1,13 @@
+services:
+  portfolio:
+    build: .
+    container_name: devsecops-portfolio
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - portfolio-net
+
+networks:
+  portfolio-net:
+    driver: bridge
