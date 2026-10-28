@@ -250,3 +250,8 @@ Capture montrant le succès de vagrant up (Ansible failed=0) et les conteneurs d
 
 Test de résilience (Tâche 45) :
 Nous avons détruit la VM (vagrant destroy -f) puis l'avons recréée. Le Portfolio a été automatiquement redéployé sans aucune intervention manuelle, prouvant la fiabilité du pipeline de provisioning.
+
+**Test de résilience (Tâche 45) :**
+Nous avons détruit complètement l'environnement (`vagrant destroy -f` et suppression des conteneurs). Une simple commande `vagrant up --provider=docker` a suffi à recréer la VM, exécuter le playbook Ansible et redéployer automatiquement le Portfolio sans aucune intervention manuelle.
+
+![Test de résilience](screenshots/12-resilience-vagrant.png)
