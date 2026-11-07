@@ -21,3 +21,4 @@ vagrant_key.pub
 
 # Docker
 .docker/
+bat=*
