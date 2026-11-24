@@ -1,24 +1,25 @@
-node_modules/
-.next/
-out/
-build/
-.DS_Store
-*.pem
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-# Vagrant & Ansible
+bat=*
+build/
+cosign.key
+.docker/
+# Docker
+.DS_Store
+.env
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+*.key
+.next/
+node_modules/
+npm-debug.log*
+out/
+*.pem
+*.retry
 .vagrant/
+# Vagrant & Ansible
 vagrant_key
 vagrant_key.pub
-*.retry
-
-# Docker
-.docker/
-bat=*
+yarn-debug.log*
+yarn-error.log*
